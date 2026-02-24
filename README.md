@@ -1,34 +1,32 @@
-# 🩺 Stress Detector System (Polygraph-inspired)
+# 🩺 Multi-Sensor Stress Detection System (Polygraph-inspired)
 
-An advanced embedded system designed to monitor and analyze physiological responses associated with stress in real-time.
+An advanced embedded system developed for monitoring physiological reactions associated with stress. The project uses real-time data fusion from multiple sensors to establish a baseline and detect deviations caused by emotional or physical stress.
 
 ## 🚀 Overview
-This project uses an **Arduino** microcontroller to collect data from multiple sensors, processing signals to calculate a "Stress Score" (0-100%). It features an automated calibration phase for baseline establishment.
+This system collects and processes biometric data to calculate a dynamic **Stress Score (0-100%)**. It features a structured operation flow: initialization, adaptive baseline calibration, and real-time monitoring with signal filtering.
 
 ## 🛠️ Hardware Components
 - **Microcontroller**: Arduino Uno/Nano
 - **Biometric Sensors**: 
-  - MAX30102 (Heart Rate & SpO2)
-  - GSR Sensor (Galvanic Skin Response)
-  - DS18B20 (Skin Temperature)
-- **Activity Monitoring**: Piezo Sensor (Detects micro-movements and physical agitation)
-- **Display**: LCD 16x2 I2C
+  - **MAX30102**: Heart Rate (BPM) & SpO2 monitoring.
+  - **GSR Sensor**: Electrodermal activity (sweat gland activation).
+  - **DS18B20**: High-precision skin temperature monitoring.
+- **Piezoelectric Sensor**: 
+  - **Dual-Role Logic**: Contributes to the overall **Stress Score** by detecting psychomotor agitation (micro-tremors) and serves as a **Data Validation** tool by identifying movement noise.
 
 ## 💻 Key Software Features
-- **Layered Logic**: Distinct modules for sensor sampling, signal filtering, and scoring.
-- **Adaptive Calibration**: 60-second baseline period to adjust thresholds to each user.
-- **Non-blocking Architecture**: Implemented using `millis()` for real-time responsiveness.
-- **Signal Filtering**: Pulse-width filtering and GSR phasic conductance calculation.
+- **Signal Processing**: Implementation of digital filters for GSR (phasic conductance) and Piezo signals (envelope detection).
+- **Adaptive Calibration**: 60-second baseline establishment to tailor the scoring algorithm to each individual user.
+- **Non-blocking Architecture**: Optimized code using `millis()` for efficient multitasking across high-frequency sensors.
+- **State Machine Logic**: `Initialization` -> `Baseline Setup` -> `GSR Calibration` -> `Active Monitoring`.
 
-## 📊 How it Works
-1. **Baseline Setup**: Measures normal BPM and Temperature.
-2. **GSR Calibration**: Calibrates skin conductance for 60 seconds.
-3. **Real-time Scoring**: 
-   - 📈 Heart rate increase adds to score.
-   - 📉 Temperature drops (common in stress) increase score.
-   - ⚡ GSR spikes indicate emotional response.
-   - ⚠️ Piezo detects if the user moves too much (invalidating the test).
+## 📊 Stress Scoring Logic
+The final score is a weighted sum derived from:
+1. **BPM Rise**: Heart rate increase relative to the baseline.
+2. **Temperature Drop**: Physiological "cold sweat" response (vasoconstriction).
+3. **GSR Spikes**: Rapid changes in skin conductance (Phasic levels).
+4. **Piezo Intensity**: Physical tension and micro-movements detected by the vibration sensor.
 
 ## 📂 Repository Structure
-- `/src`: Contains the `.ino` source code.
-- `/docs`: Schematics, assembly photos, and technical documentation.
+- `/src`: Arduino source code (`.ino`).
+- `/docs`: Technical documentation (UTCN), schematics, and experimental results.
