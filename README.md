@@ -27,6 +27,13 @@ The final score is a weighted sum derived from:
 3. **GSR Spikes**: Rapid changes in skin conductance (Phasic levels).
 4. **Piezo Intensity**: Physical tension and micro-movements detected by the vibration sensor.
 
+---
+
+## 📄 Documentation & Research
+The project is backed by technical research on biometric data fusion. You can find the complete project report, including the mathematical model for stress calculation and the electronic schematics, here:
+- 📑 **[Multi-Sensor Stress Detection System Report (PDF)](./docs/Stress_detection_system_documentation.pdf)**
+
+---
 ## 📂 Repository Structure
 - `/src`: Arduino source code (`.ino`).
 - `/docs`: Technical documentation (UTCN), schematics, and experimental results.
