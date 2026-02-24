@@ -11,7 +11,7 @@ This project uses an **Arduino** microcontroller to collect data from multiple s
   - MAX30102 (Heart Rate & SpO2)
   - GSR Sensor (Galvanic Skin Response)
   - DS18B20 (Skin Temperature)
-- **Activity Monitoring**: Piezo Vibration Sensor (to detect movement noise)
+- **Activity Monitoring**: Piezo Sensor (Detects micro-movements and physical agitation)
 - **Display**: LCD 16x2 I2C
 
 ## 💻 Key Software Features
