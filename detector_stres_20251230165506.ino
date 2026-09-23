@@ -456,43 +456,43 @@ void loop() {
     lieScore = constrain(lieScore, 0, 100);
 
     // Optional debug to Serial
-    static unsigned long lastDbg = 0;
-    if (millis() - lastDbg > 1000) {
-      lastDbg = millis();
-      Serial.print("bpm=");
-      Serial.print((int)bpmAvg);
-      Serial.print(" base=");
-      Serial.print((int)bpmBaseline);
+  //   static unsigned long lastDbg = 0;
+  //   if (millis() - lastDbg > 1000) {
+  //     lastDbg = millis();
+  //     Serial.print("bpm=");
+  //     Serial.print((int)bpmAvg);
+  //     Serial.print(" base=");
+  //     Serial.print((int)bpmBaseline);
 
-      Serial.print(" temp=");
-      Serial.print(tempC, 2);
-      Serial.print(" base=");
-      Serial.print(tempBaseline, 2);
+  //     Serial.print(" temp=");
+  //     Serial.print(tempC, 2);
+  //     Serial.print(" base=");
+  //     Serial.print(tempBaseline, 2);
 
-      Serial.print(" piezoEnv=");
-      Serial.print(piezoEnvelope);
-      Serial.print(" piezoBase=");
-      Serial.print(piezoBaseEnv);
-      Serial.print(" pzState=");
-      Serial.print(piezoStateText());
+  //     Serial.print(" piezoEnv=");
+  //     Serial.print(piezoEnvelope);
+  //     Serial.print(" piezoBase=");
+  //     Serial.print(piezoBaseEnv);
+  //     Serial.print(" pzState=");
+  //     Serial.print(piezoStateText());
 
-      Serial.print(" GSRraw=");
-      Serial.print(gsrLastRaw);
-      Serial.print(" GSRbase=");
-      Serial.print((int)gsrBase);
-      Serial.print(" GSRfast=");
-      Serial.print((int)gsrFast);
-      Serial.print(" GSRph=");
-      Serial.print(gsrLastPhasic);
-      Serial.print(" GSRs=");
-      Serial.print(gsrLastScore);
-      Serial.print(" gsrContrib=");
-      Serial.print(gsrScoreContribution());
+  //     Serial.print(" GSRraw=");
+  //     Serial.print(gsrLastRaw);
+  //     Serial.print(" GSRbase=");
+  //     Serial.print((int)gsrBase);
+  //     Serial.print(" GSRfast=");
+  //     Serial.print((int)gsrFast);
+  //     Serial.print(" GSRph=");
+  //     Serial.print(gsrLastPhasic);
+  //     Serial.print(" GSRs=");
+  //     Serial.print(gsrLastScore);
+  //     Serial.print(" gsrContrib=");
+  //     Serial.print(gsrScoreContribution());
 
-      Serial.print(" score=");
-      Serial.println(lieScore);
-    }
-  }
+  //     Serial.print(" score=");
+  //     Serial.println(lieScore);
+  //   }
+  // }
 
   // ===== TELEMETRY PAYLOAD PENTRU TESTARE AUTOMATA (HiL) =====
     static unsigned long lastTelemetry = 0;
