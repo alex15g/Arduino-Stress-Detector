@@ -1,31 +1,32 @@
-# 🩺 Multi-Sensor Stress Detection System (Polygraph-inspired)
+# 🩺 Multi-Sensor Biometric Data Fusion & HiL Validation System
 
-An advanced embedded system developed for monitoring physiological reactions associated with stress. The project uses real-time data fusion from multiple sensors to establish a baseline and detect deviations caused by emotional or physical stress.
+An advanced embedded system engineered for the real-time monitoring and processing of physiological data. The project utilizes sensor fusion to establish an adaptive biometric baseline and detect deviations caused by physiological stress, validated through an automated Python-based testing architecture.
 
 ## 🚀 Overview
-This system collects and processes biometric data to calculate a dynamic **Stress Score (0-100%)**. It features a structured operation flow: initialization, adaptive baseline calibration, and real-time monitoring with signal filtering.
+This system collects and processes high-frequency biometric data to compute a dynamic **Physiological Stress Score (0-100%)**. It features a strict Finite State Machine (FSM) operation flow: initialization, adaptive baseline calibration, real-time digital filtering, and continuous monitoring. To ensure data integrity and system reliability, the architecture integrates a custom **Hardware-in-the-Loop (HiL) automated testing bench**.
 
-## 🛠️ Hardware Components
-- **Microcontroller**: Arduino Uno/Nano
+## 🛠️ Hardware Architecture
+- **Microcontroller**: Arduino Uno/Nano (C++ Firmware)
 - **Biometric Sensors**: 
-  - **MAX30102**: Heart Rate (BPM) & SpO2 monitoring.
-  - **GSR Sensor**: Electrodermal activity (sweat gland activation).
-  - **DS18B20**: High-precision skin temperature monitoring.
-- **Piezoelectric Sensor**: 
-  - **Dual-Role Logic**: Contributes to the overall **Stress Score** by detecting psychomotor agitation (micro-tremors) and serves as a **Data Validation** tool by identifying movement noise.
+  - **MAX30102 (I2C)**: Optical pulse oximetry for continuous Heart Rate (BPM) extraction.
+  - **GSR Sensor (Analog)**: Electrodermal activity measurement to track phasic skin conductance (sweat gland activation).
+  - **DS18B20 (OneWire)**: High-precision digital skin temperature monitoring.
+- **Piezoelectric Sensor (Analog)**: 
+  - **Dual-Role Logic**: Monitors psychomotor agitation (micro-tremors) and serves as an active **Data Validation** tool by filtering out mechanical noise and movement artifacts.
 
-## 💻 Key Software Features
-- **Signal Processing**: Implementation of digital filters for GSR (phasic conductance) and Piezo signals (envelope detection).
-- **Adaptive Calibration**: 60-second baseline establishment to tailor the scoring algorithm to each individual user.
-- **Non-blocking Architecture**: Optimized code using `millis()` for efficient multitasking across high-frequency sensors.
-- **State Machine Logic**: `Initialization` -> `Baseline Setup` -> `GSR Calibration` -> `Active Monitoring`.
+## 💻 Key Software & Testing Features
+- **Hardware-in-the-Loop (HiL) Automation**: A custom Python/pySerial script (`hil_test_runner.py`) acts as an automated test bench, parsing CSV telemetry over UART and running live assertions on physiological bounds and state machine integrity.
+- **Industrial Telemetry Payload**: Replaced standard debug prints with a strictly formatted CSV data stream optimized for machine reading and automated validation.
+- **Digital Signal Processing (DSP)**: Custom implementation of digital filters for GSR (slow/fast baseline tracking) and Piezo signals (envelope detection).
+- **Non-blocking Architecture**: Engineered using `millis()` for concurrent task scheduling and efficient polling across multiple sensor buses without blocking delays.
+- **Adaptive Calibration Engine**: 60-second baseline establishment that dynamically tailors the algorithmic thresholds to individual user physiology.
 
-## 📊 Stress Scoring Logic
-The final score is a weighted sum derived from:
-1. **BPM Rise**: Heart rate increase relative to the baseline.
-2. **Temperature Drop**: Physiological "cold sweat" response (vasoconstriction).
-3. **GSR Spikes**: Rapid changes in skin conductance (Phasic levels).
-4. **Piezo Intensity**: Physical tension and micro-movements detected by the vibration sensor.
+## 📊 Algorithmic Scoring Logic
+The final telemetry output includes a weighted physiological score derived from:
+1. **BPM Rise**: Heart rate elevation relative to the adaptive baseline.
+2. **Peripheral Temperature Drop**: Physiological vasoconstriction response.
+3. **GSR Phasic Spikes**: Rapid transient changes in skin conductance.
+4. **Piezo Intensity**: Physical tension and micro-movements detected via envelope tracking.
 
 ---
 
@@ -35,5 +36,5 @@ The project is backed by technical research on biometric data fusion. You can fi
 
 ---
 ## 📂 Repository Structure
-- `/src`: Arduino source code (`.ino`).
+- `/src`: Contains the non-blocking C++ firmware (`stress_detector.ino`) and the Python automated testing script (`hil_test_runner.py`).
 - `/docs`: Technical documentation (UTCN), schematics, and experimental results.
